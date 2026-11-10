@@ -14,15 +14,13 @@ jobs:
 
     strategy:
       matrix:
-        os:
-          - Ubuntu
         kicad-version:
           - "7.0"
           - "8.0"
           - "9.0"
           - "10.0"
 
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: [self-hosted, manupa-hnx]
     container:
       image: kicad/kicad:${{ matrix.kicad-version }}
       options: --user root
@@ -30,6 +28,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Configure Git safe directory
+        run: git config --global --add safe.directory '*'
 
       - name: Set up build environment
         shell: bash
