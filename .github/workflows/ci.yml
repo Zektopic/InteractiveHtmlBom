@@ -13,6 +13,7 @@ jobs:
     name: KiCAD ${{ matrix.kicad-version }}
 
     strategy:
+      fail-fast: false
       matrix:
         kicad-version:
           - "7.0"
@@ -36,7 +37,7 @@ jobs:
         shell: bash
         run: |
           apt update && apt install -y python3-pip
-          python3 -m pip install --break-system-packages --upgrade hatch
+          python3 -m pip install --break-system-packages --upgrade --ignore-installed hatch
 
       - name: Test
         run: hatch -v run pytest -vv tests
