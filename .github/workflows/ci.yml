@@ -1,6 +1,9 @@
 ---
 name: Test
 
+permissions:
+  contents: read
+
 on:
   pull_request:
   push:
@@ -28,7 +31,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configure Git safe directory
         run: git config --global --add safe.directory '*'
